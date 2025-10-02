@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build:
+      context: ./Front
+    container_name: angular_frontend
+    # Map host port 4200 (or desired port) to container port 80 (Nginx default)
+    ports:
+      - "4200:80"
+    # Ensure Angular can talk to the FastAPI backend service named 'api'
+    depends_on:
+      - api
+    restart: always
+  api:
+    build:
+      context: ./Back
+    container_name: fastapi_api
+    ports:
+      - 8000:8000
+    environment:
+      # Use host.docker.internal as the database host
+      DB_HOST: host.docker.internal
+      DB_PORT: 3306
+      DB_USER: seba
+      DB_PASSWORD: investments
+      DB_NAME: investments
