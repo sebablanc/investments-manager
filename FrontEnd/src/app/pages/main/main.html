@@ -1,0 +1,6 @@
+<h1>Gestor de inversiones</h1>
+<div class="grilla">
+    @for (button of buttons; track button.label) {
+        <app-big-button [class]="button.class" [extraClass]="button.extraClass || ''" [label]="button.label" [icon]="button.icon" (onClick)="navigate(button.route)"/>
+    }
+</div>

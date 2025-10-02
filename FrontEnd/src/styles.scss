@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'OpenSans';
+    src: url('../public/Font/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
+* {
+    font-family: 'OpenSans';
+}
+
+body {
+    padding: 20px;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+}
+
+.add-padding-10 {
+    padding: 10px;
+}
+
+.cdk-dialog-container {
+    display: block;
+    border-radius: 0.375em;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
+    filter: drop-shadow(0 0 2em rgba(black, 0.5));
+    padding: 0 2em 2em;
+    width: 50vw;
+}
+
+.default-height {
+  height: calc(25vh - 10px);
+}

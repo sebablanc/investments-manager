@@ -1,0 +1,13 @@
+<div class="small-botonera-container">
+  <div class="left-container">
+    @if (showDeleteButton()) {
+      <button type="button" class="delete" (click)="deleteClicked.emit(true)">{{ deleteLbl() }}</button>
+    }
+  </div>
+  <div class="right-container">
+    @if (showCancelButton()) {
+      <button type="button" (click)="cancelClicked.emit(true)">Cancelar</button>
+    }
+    <button type="submit" [disabled]="disabled()" (click)="submitClicked.emit(true)">{{ submitLbl() }}</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<form [class]="formClass()" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="input-container">
+    @for (input of formInputs; track $index) {
+    <label>{{ input.label }}</label>
+    @switch (input.type) { @case('number'){
+    <input type="number" [formControlName]="input.formControlName" />
+    } @case('select'){
+    <select title="select" [formControlName]="input.formControlName">
+      <option value="">-- Seleccione una opción --</option>
+         @for (option of input.values; track $index) {
+          <option [value]="option.key">{{ option.label }}</option>
+         }
+    </select>
+    } @default {
+    <input [type]="input.type" [formControlName]="input.formControlName" />
+    } } }
+  </div>
+
+  <ng-content />
+
+  <!-- GUARDAR -->
+  <app-small-botonera submitLbl="Guardar" [disabled]="!form.valid" [showDeleteButton]="showDeleteButton" (cancelClicked)="cancelClicked.emit(true)" (deleteClicked)="deleteClicked.emit(true)"  />
+</form>

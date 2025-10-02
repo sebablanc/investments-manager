@@ -1,0 +1,7 @@
+@if(this.showBackBtn()) {
+  <app-common-button (backClicked)="back()" />
+}
+<router-outlet />
+@if(this.loading()){
+  <app-loading-component />
+}

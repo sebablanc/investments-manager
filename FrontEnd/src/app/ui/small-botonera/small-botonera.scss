@@ -1,0 +1,41 @@
+.small-botonera-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 10px;
+
+  button {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+
+    &[type='submit'] {
+      background-color: green;
+      color: white;
+      border: 0px;
+    }
+
+    &[type='button'] {
+      background-color: transparent;
+      color: green;
+      border: 0px;
+    }
+
+    &[type='button']:active {
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      background-color: gray;
+      cursor:not-allowed
+    }
+
+    &.delete {
+      background-color: rgb(211, 4, 4);
+      color: white;
+      border: 0px;
+    }
+
+  }
+}

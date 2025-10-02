@@ -1,0 +1,45 @@
+<h1>{{ titulo }}</h1>
+<app-form 
+  [form]="caucionForm"
+  [inputs]="caucionInputs"
+  (submit)="onSubmit()"
+  [showDeleteButton]="!!(caucion && caucion.caucion_id)"
+  (cancelClicked)="cancelClicked.emit()"
+  (deleteClicked)="deleteClicked.emit()">
+  <div class="caucion-data">
+    <div class="monto-total">
+      <p class="uppercase">Monto total</p>
+      <p class="monto-total-value">{{ importeNetoReal | currency }}</p>
+    </div>
+
+    <div class="desglose-montos">
+      <div class="desglose">
+        <p class="desglose-label">Importe bruto</p>
+        <p class="desglose-value">{{ importeBruto | currency }}</p>
+      </div>
+      <div class="desglose">
+        <p class="desglose-label">Derecho de mercado</p>
+        <p class="desglose-value">{{ importeDerechoMercado | currency }}</p>
+      </div>
+      <div class="desglose">
+        <p class="desglose-label">Comisión</p>
+        <p class="desglose-value">{{ importeComision | currency }}</p>
+      </div>
+      <div class="desglose">
+        <p class="desglose-label">IVA 21%</p>
+        <p class="desglose-value">{{ importeIVA | currency }}</p>
+      </div>
+    </div>
+
+    <div class="info-final">
+      <div class="info">
+        <p class="uppercase">Ganancia neta</p>
+        <p>{{ importeGananciaNetaReal | currency }}</p>
+      </div>
+      <div class="info">
+        <p class="uppercase">Fecha de liquidación</p>
+        <p>{{ fechaLiquidacion | date : 'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+</app-form>

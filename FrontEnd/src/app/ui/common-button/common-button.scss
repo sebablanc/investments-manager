@@ -1,0 +1,27 @@
+button {
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+
+    &[type='submit'] {
+      background-color: green;
+      color: white;
+      border: 0px;
+    }
+
+    &[type='button'] {
+      background-color: transparent;
+      color: green;
+      border: 0px;
+    }
+
+    &[type='button']:active {
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      background-color: gray;
+      cursor:not-allowed
+    }
+  }

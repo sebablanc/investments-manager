@@ -1,0 +1,8 @@
+<h1>Fondos Comunes de Inversión (FCI)</h1>
+<app-table [headers]="headers">
+  @for (fondo of fondos(); track $index) {
+  <tr class="data-row">
+  </tr>
+  }
+</app-table>
+<app-big-button label="Nuevo FCI" extraClass="add-padding-10" (onClick)="goTo()" />

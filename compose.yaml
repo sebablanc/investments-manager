@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./Front
+      context: ./FrontEnd
     container_name: angular_frontend
     # Map host port 4200 (or desired port) to container port 80 (Nginx default)
     ports:

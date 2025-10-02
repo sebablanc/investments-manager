@@ -1,0 +1,11 @@
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(3, calc(33.3333333333% - 18px));
+  gap: 16px;
+  width: 100%;
+}
+
+.complete-row {
+  grid-column: 1 / span 3;
+  height: 100px;
+}

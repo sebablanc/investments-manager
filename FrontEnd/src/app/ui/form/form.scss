@@ -1,0 +1,22 @@
+.caucion-form {
+  width: 100%;
+
+  .input-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.fci-form {
+  width: 80%;
+  justify-self: center;
+
+  .input-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    column-gap: 10px;
+    margin-bottom: 10px;
+  }
+}

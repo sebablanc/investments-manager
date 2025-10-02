@@ -1,0 +1,14 @@
+<h1>Cauciones</h1>
+<app-table [headers]="headers">
+  @for (caucion of cauciones(); track $index) {
+  <tr class="data-row" (click)="openModal(caucion)">
+    <td>{{ caucion.fecha | date : 'dd/MM/yyyy' }}</td>
+    <td>{{ caucion.monto | currency }}</td>
+    <td>{{ caucion.tna }}</td>
+    <td>{{ caucion.fecha | fechaLiquidacion : caucion.dias }}</td>
+    <td>{{ caucion.dias }}</td>
+    <td>{{ caucion | gananciaNeta | currency }}</td>
+  </tr>
+  }
+</app-table>
+<app-big-button label="Nueva caución" extraClass="add-padding-10" (onClick)="openModal(null)" />

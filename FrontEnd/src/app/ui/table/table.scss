@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+  margin: 0 auto 10px;
+}
+
+th {
+  font-weight: bold;
+}
+
+table,
+th {
+  padding: 10px;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+

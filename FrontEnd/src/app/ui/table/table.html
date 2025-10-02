@@ -1,0 +1,10 @@
+<table>
+  <thead>
+    @for (header of headers(); track $index) {
+    <th>{{ header }}</th>
+    }
+  </thead>
+  <tbody>
+    <ng-content />
+  </tbody>
+</table>

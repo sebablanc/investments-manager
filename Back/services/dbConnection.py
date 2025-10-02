@@ -11,7 +11,7 @@ class DBConnection:
         DB_NAME = os.getenv("DB_NAME", "investments")
         
         # 2. Construct the connection string using the environment variable
-        connection_url = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+        connection_url = f"mysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
         try:
             engine = create_engine(connection_url)
