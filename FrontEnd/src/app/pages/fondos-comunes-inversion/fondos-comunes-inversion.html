@@ -1,8 +1,15 @@
 <h1>Fondos Comunes de Inversión (FCI)</h1>
 <app-table [headers]="headers">
   @for (fondo of fondos(); track $index) {
-  <tr class="data-row">
+  <tr class="data-row" (click)="modifyCaucion(fondo)">
+    <td>{{ fondo.nombre }}</td>
+    <td>{{ fondo.gerente }}</td>
+    <td>{{ fondo.clase }}</td>
+    <td>{{ fondo.valor_cuotaparte | currency }}</td>
+    <td>{{ fondo.tipo_inversion | tipoInversion }}</td>
+    <td>{{ fondo.benchmark }}</td>
+    <td>{{ fondo.horizonte | horizonte }}</td>
   </tr>
   }
 </app-table>
-<app-big-button label="Nuevo FCI" extraClass="add-padding-10" (onClick)="goTo()" />
+<app-big-button label="Nuevo FCI" extraClass="add-padding-10 max-width-80" (onClick)="goTo()" />

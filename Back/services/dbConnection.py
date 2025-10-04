@@ -1,5 +1,8 @@
 import os
-from sqlmodel import create_engine, Session
+from typing import List
+from sqlmodel import create_engine, Session, select
+
+from DTOs.databaseModel.caucionModel import Caucion
 
 class DBConnection:
     def __init__(self):
@@ -25,3 +28,7 @@ class DBConnection:
 
     def get_session(self):
         return self.session
+    
+    def get_all(self, type = Caucion) -> List:
+        statement = select(type)
+        return self.session.exec(statement)

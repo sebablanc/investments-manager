@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapi import HTTPException
+from sqlmodel import select
 from DTOs.databaseModel.fciModel import Fci
 from DTOs.genericResponse import GenericResponse
 from services.dbConnection import DBConnection
@@ -12,10 +13,11 @@ class FciService:
         self.session = self.db.get_session()
 
     def get_all(self) -> List[Fci]:
-        return self.session.query(Fci)
+        return self.db.get_all(Fci)
     
     def get_by_id(self, id) -> Fci:
-        return self.session.query(Fci).where(Fci.fci_id == int(id)).first()
+        statement = select(Fci).where(Fci.fci_id == id)
+        return self.session.exec(statement).first()
 
     def save(self, fci: Fci) -> Fci:
         self.session.add(fci)

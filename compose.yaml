@@ -3,21 +3,41 @@ services:
     build:
       context: ./FrontEnd
     container_name: angular_frontend
-    # Map host port 4200 (or desired port) to container port 80 (Nginx default)
+    # 1. Mapear 4200:4200 para el servidor de desarrollo de Angular (ng serve)
     ports:
-      - "4200:80"
-    # Ensure Angular can talk to the FastAPI backend service named 'api'
+      - "4200:4200"
+    # 2. Montar volúmenes para sincronización
+    volumes:
+      # Monta el código fuente. Esto permite que ng serve detecte cambios.
+      - ./FrontEnd:/app 
+      # Volumen anónimo para node_modules. Esto previene conflictos 
+      # entre las dependencias de tu host y el contenedor.
+      - /app/node_modules 
+    # 3. Comando para iniciar el servidor de desarrollo de Angular
+    # Se usa --host 0.0.0.0 para que el servidor sea accesible desde fuera del contenedor.
+    command: npm run start
     depends_on:
       - api
     restart: always
+  
   api:
     build:
       context: ./Back
     container_name: fastapi_api
     ports:
       - 8000:8000
+    # 🚨 PASO CLAVE 1: Configurar volúmenes para sincronización
+    volumes:
+      # Monta el código fuente local en el contenedor.
+      - ./Back:/app
+      # Volumen anónimo para dependencias de Python (si se usa un entorno virtual).
+      # Esto evita que los archivos .venv o similares se monten desde el host.
+      - /app/venv
+      # 🚨 PASO CLAVE 2: Usar Uvicorn con recarga automática
+      # Debes ajustar "main:app" a la ubicación real de tu instancia de FastAPI.
+      # --host 0.0.0.0 es crucial para que sea accesible dentro de Docker.
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     environment:
-      # Use host.docker.internal as the database host
       DB_HOST: host.docker.internal
       DB_PORT: 3306
       DB_USER: seba

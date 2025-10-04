@@ -32,7 +32,7 @@ export class FondosComunesInversionConfiguration {
     {
       label: 'Tipo de inversión',
       type: 'select',
-      formControlName: 'tipo_inversión',
+      formControlName: 'tipo_inversion',
       values: TIPO_INVERSION,
     },
     { label: 'Benchmark', type: 'text', formControlName: 'benchmark' },

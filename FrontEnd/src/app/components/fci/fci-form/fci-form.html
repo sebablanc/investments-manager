@@ -1,5 +1,9 @@
 <h1>{{ titulo }}</h1>
-<app-form [form]="fciForm" [inputs]="fciInputs" [formClass]="'fci-form'">
+<app-form 
+  [form]="fciForm"
+  [inputs]="fciInputs"
+  [formClass]="'fci-form'"
+  (submit)="onSubmit()">
   <p>hola</p>
 </app-form>
 

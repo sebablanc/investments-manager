@@ -5,18 +5,20 @@ from fastapi import HTTPException
 from DTOs.databaseModel.caucionModel import Caucion
 from DTOs.genericResponse import GenericResponse
 from services.dbConnection import DBConnection
+from sqlmodel import select
 
 
 class CaucionService:
     def __init__(self):
         self.db = DBConnection()
         self.session = self.db.get_session()
-
+    
     def get_all(self) -> List[Caucion]:
-        return self.session.query(Caucion)
-
+        return self.db.get_all(Caucion)
+    
     def get_by_id(self, id) -> Caucion:
-        return self.session.query(Caucion).where(Caucion.caucion_id == int(id)).first()
+        statement = select(Caucion).where(Caucion.caucion_id == id)
+        return self.session.exec(statement).first()
 
     def save(self, caucion: Caucion) -> Caucion:
         self.session.add(caucion)

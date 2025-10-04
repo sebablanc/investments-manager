@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputForm } from '../../../models/input-form';
 import { FondosComunesInversionConfiguration } from '../../../configuration/fci/fondos-comunes-inversion-configuration';
 import { Form } from "../../../ui/form/form";
+import { IFci } from '../../../models/DTOs/IFci';
+import { FciUtils } from '../../../utils/FciUtils';
 
 @Component({
   selector: 'app-fci-form',
@@ -13,6 +15,7 @@ import { Form } from "../../../ui/form/form";
 export class FciForm {
   titulo: string = 'Nuevo FCI';
   fciInputs: InputForm[] = [];
+  data = output<IFci>();
 
   fciForm = new FormGroup({
     fci_id: new FormControl<number | null>(null),
@@ -24,7 +27,7 @@ export class FciForm {
     porc_anno: new FormControl<number>(0, [Validators.required, Validators.min(0)]),
     porc_anual: new FormControl<number>(0, [Validators.required, Validators.min(0)]),
     porc_honorarios: new FormControl<number>(0, [Validators.required, Validators.min(0)]),
-    tipo_inversión: new FormControl<number | null>(0, [Validators.required, Validators.min(0)]),
+    tipo_inversion: new FormControl<string>('', [Validators.required]),
     benchmark: new FormControl<string>('', [Validators.required]),
     moneda: new FormControl<string>('', [Validators.required]),
     horizonte: new FormControl<string>('', [Validators.required]),
@@ -40,7 +43,6 @@ export class FciForm {
   }
 
   onSubmit() {
-    console.log('onSubmit');
-    console.log(this.fciForm.value);
+    this.data.emit(FciUtils.parseFormToIFci(this.fciForm));
   }
 }
