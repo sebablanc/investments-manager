@@ -5,6 +5,9 @@ import { FondosComunesInversionConfiguration } from '../../../configuration/fci/
 import { Form } from "../../../ui/form/form";
 import { IFci } from '../../../models/DTOs/IFci';
 import { FciUtils } from '../../../utils/FciUtils';
+import { SIMBOLO_MONEDA } from '../../../consts/moneda.const';
+import { CalculatorUtils } from '../../../utils/CalculatorUtils';
+import { SelectedFciService } from '../../../services/fci/selected-fci-service';
 
 @Component({
   selector: 'app-fci-form',
@@ -13,9 +16,17 @@ import { FciUtils } from '../../../utils/FciUtils';
   styleUrl: './fci-form.scss',
 })
 export class FciForm {
+  data = output<IFci>();
+  cancelClicked = output();
+  deleteClicked = output();
+  
   titulo: string = 'Nuevo FCI';
   fciInputs: InputForm[] = [];
-  data = output<IFci>();
+  fci: IFci | null = null;
+  simbolo_moneda: string = '';
+  proyeccion_por_dia: number = 0;
+  proyeccion_por_mes: number = 0;
+  proyeccion_por_anno: number = 0;
 
   fciForm = new FormGroup({
     fci_id: new FormControl<number | null>(null),
@@ -36,10 +47,39 @@ export class FciForm {
     gerente: new FormControl<string>('', [Validators.required]),
   });
 
-  constructor(private fciConfig: FondosComunesInversionConfiguration) {}
+  constructor(private fciConfig: FondosComunesInversionConfiguration, private selectedFciSrv: SelectedFciService) {}
 
   ngOnInit() {
     this.fciInputs = this.fciConfig.fciInputs;
+    this.fci = this.selectedFciSrv.fci();
+
+    this.fciForm.controls.moneda.valueChanges.subscribe(value => {
+      if(value) this.simbolo_moneda = SIMBOLO_MONEDA[value];
+    });
+
+    this.fciForm.controls.porc_dia.valueChanges.subscribe(value => {
+      if(value) this.proyeccion_por_dia = CalculatorUtils.calcularPorcentaje(100, value);
+    });
+
+    this.fciForm.controls.porc_mes.valueChanges.subscribe(value => {
+      if(value) this.proyeccion_por_mes = CalculatorUtils.calcularPorcentaje(100, value);
+    });
+
+    this.fciForm.controls.porc_anno.valueChanges.subscribe(value => {
+      if(value) this.proyeccion_por_anno = CalculatorUtils.calcularPorcentaje(100, value);
+    });
+
+    if (this.fci) {
+      this.titulo = 'Modificar FCI';
+      this.fillForm();
+    }
+    
+  }
+
+  private fillForm() {
+    this.fciForm.patchValue({
+      ...this.fci
+    });
   }
 
   onSubmit() {

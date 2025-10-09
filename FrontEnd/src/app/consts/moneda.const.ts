@@ -3,3 +3,9 @@ export const MONEDA = [
   {key: 'DOLAR', label: 'Dólares'},
   {key: 'EURO', label: 'Euros'}
 ]
+
+export const SIMBOLO_MONEDA: Record<string, string> = {
+  'PESOS': "$",
+  'DOLAR': "u$s",
+  'EURO': "€"
+}

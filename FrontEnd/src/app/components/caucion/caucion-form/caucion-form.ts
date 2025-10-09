@@ -50,15 +50,14 @@ export class CaucionForm {
     this.caucionInputs = this.caucionConfig.caucionInputs;
     this.caucion = this.selectedCaucionSrv.caucion();
 
-    if (this.caucion) {
-      this.titulo = 'Modificar caución';
-      this.fillForm();
-      this.calcularMontos();
-    }
-
     this.caucionForm.valueChanges.subscribe(() => {
       this.calcularMontos();
     });
+
+    if (this.caucion) {
+      this.titulo = 'Modificar caución';
+      this.fillForm();
+    }
   }
 
   private calcularMontos() {

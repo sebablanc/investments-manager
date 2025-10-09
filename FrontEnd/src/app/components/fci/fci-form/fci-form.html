@@ -3,7 +3,24 @@
   [form]="fciForm"
   [inputs]="fciInputs"
   [formClass]="'fci-form'"
-  (submit)="onSubmit()">
-  <p>hola</p>
+  [showDeleteButton]="!!(fci && fci.fci_id)"
+  (submit)="onSubmit()"
+  (cancelClicked)="cancelClicked.emit()"
+  (deleteClicked)="deleteClicked.emit()">
+  <h3>Proyección de importes a cobrar cada {{simbolo_moneda}}100 (no son valores seguros)</h3>
+  <div class="desglose-montos">
+      <div class="desglose">
+        <p class="desglose-label">Diaria</p>
+        <p class="desglose-value">{{ simbolo_moneda + ' ' +proyeccion_por_dia }}</p>
+      </div>
+      <div class="desglose">
+        <p class="desglose-label">Mensual</p>
+        <p class="desglose-value">{{ simbolo_moneda + ' ' +proyeccion_por_mes }}</p>
+      </div>
+      <div class="desglose">
+        <p class="desglose-label">Anual</p>
+        <p class="desglose-value">{{ simbolo_moneda + ' ' +proyeccion_por_anno }}</p>
+      </div>
+    </div>
 </app-form>
 

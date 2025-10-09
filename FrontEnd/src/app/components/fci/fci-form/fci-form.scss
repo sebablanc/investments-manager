@@ -1,0 +1,33 @@
+.desglose-montos {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        margin-bottom: 40px;
+        column-gap: 10px;
+        row-gap: 10px;
+
+        .desglose {
+            display: flex;
+            font-size: 15px;
+            column-gap: 5px;
+
+            .desglose-label {
+                background-color: rgb(204, 107, 0);
+                padding-left: 5px;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                width: 50%;
+                height: 100%;
+                align-content: center;
+            }
+
+            .desglose-value {
+                background-color: rgb(204, 107, 0);
+                padding-left: 5px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                width: 50%;
+                height: 100%;
+                align-content: center;
+            }
+        }
+    }

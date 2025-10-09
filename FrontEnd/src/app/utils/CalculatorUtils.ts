@@ -22,4 +22,12 @@ export class CalculatorUtils {
     static calcularIVA(monto: number) {
         return monto * PORCENTAJE_IVA
     }
+
+    static calcularMontoConPorcentaje(monto: number, porcentaje: number){
+        return monto + this.calcularPorcentaje(monto, porcentaje);
+    }
+
+    static calcularPorcentaje(monto: number, porcentaje: number) {
+        return monto * porcentaje;
+    }
 }
